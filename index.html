@@ -39,13 +39,9 @@
     from { opacity: 0; transform: scale(0); }
     to { opacity: 1; transform: scale(1); }
   }
-  @keyframes floralInLeft {
-    from { opacity: 0; transform: translate(-10px, 14px) scale(0.9); }
-    to { opacity: 0.85; transform: translate(0, 0) scale(1); }
-  }
-  @keyframes floralInRight {
-    from { opacity: 0; transform: scaleX(-1) translate(-10px, 14px) scale(0.9); }
-    to { opacity: 0.85; transform: scaleX(-1) translate(0, 0) scale(1); }
+  @keyframes floralIn {
+    from { opacity: 0; transform: translateY(14px) scale(0.97); }
+    to { opacity: 0.92; transform: translateY(0) scale(1); }
   }
   @keyframes successIn {
     from { opacity: 0; transform: translateY(10px) scale(0.97); }
@@ -94,22 +90,20 @@
     animation: cardIn .8s cubic-bezier(.22,.9,.32,1) both;
   }
 
-  .floral {
+  .floral-bottom {
     position: absolute;
-    color: var(--wine-soft);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    display: block;
     opacity: 0;
     pointer-events: none;
-  }
-  .floral.bottom-left {
-    left: 0; bottom: 0; width: 208px; height: 208px;
-    animation: floralInLeft 1.4s ease-out .5s both;
-  }
-  .floral.bottom-right {
-    right: 0; bottom: 0; width: 208px; height: 208px;
-    animation: floralInRight 1.4s ease-out .6s both;
+    animation: floralIn 1.4s ease-out .5s both;
   }
 
-  .card { padding-bottom: 200px; }
+  .card { padding-bottom: 245px; }
   form { padding-bottom: 20px; }
   footer { position: relative; z-index: 1; }
 
@@ -398,124 +392,14 @@
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
-    .floral.bottom-left, .floral.bottom-right { opacity: 0.85; }
-    .floral.bottom-right { transform: scaleX(-1); }
+    .floral-bottom { opacity: 0.92; }
   }
 </style>
 </head>
 <body>
 <div style="width:100%; max-width:480px;">
   <div class="card">
-    <svg class="floral bottom-left" viewBox="-20 -40 280 280" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round">
-      <defs>
-        <path id="mg-petal" d="M0,0 C -7,-9 -12,-19 -11,-31 C -10,-43 -4,-51 0,-55 C 4,-51 10,-43 11,-31 C 12,-19 7,-9 0,0 Z" fill="var(--paper)"/>
-        <path id="mg-petal-sm" d="M0,0 C -5,-6 -8,-13 -7,-21 C -6,-29 -3,-34 0,-37 C 3,-34 6,-29 7,-21 C 8,-13 5,-6 0,0 Z" fill="var(--paper)"/>
-        <path id="mg-vein" d="M0,-4 L0,-49" fill="none"/>
-        <path id="mg-vein-side" d="M-3,-19 C -5,-26 -5,-33 -3,-39 M3,-19 C 5,-26 5,-33 3,-39" fill="none"/>
-        <path id="mg-vein-sm" d="M0,-3 L0,-32" fill="none"/>
-        <path id="mg-leaf" d="M0,0 C -11,-22 -11,-52 0,-70 C 11,-52 11,-22 0,0 Z" fill="var(--paper)"/>
-        <path id="mg-leaf-vein" d="M0,-5 L0,-64 M0,-20 C -4,-25 -8,-29 -11,-33 M0,-20 C 4,-25 8,-29 11,-33 M0,-38 C -4,-42 -7,-46 -9,-51 M0,-38 C 4,-42 7,-46 9,-51" fill="none"/>
-
-        <g id="mg-bloom-lg">
-          <use href="#mg-petal" transform="rotate(-150) scale(0.55)"/>
-          <use href="#mg-petal" transform="rotate(150) scale(0.55)"/>
-          <use href="#mg-petal" transform="rotate(-110) scale(0.68)"/><use href="#mg-vein" transform="rotate(-110) scale(0.68)"/>
-          <use href="#mg-petal" transform="rotate(110) scale(0.68)"/><use href="#mg-vein" transform="rotate(110) scale(0.68)"/>
-          <use href="#mg-petal" transform="rotate(-62) scale(0.92)"/><use href="#mg-vein" transform="rotate(-62) scale(0.92)"/>
-          <use href="#mg-petal" transform="rotate(-24) scale(1)"/><use href="#mg-vein" transform="rotate(-24) scale(1)"/><use href="#mg-vein-side" transform="rotate(-24) scale(1)"/>
-          <use href="#mg-petal" transform="rotate(18) scale(1.02)"/><use href="#mg-vein" transform="rotate(18) scale(1.02)"/><use href="#mg-vein-side" transform="rotate(18) scale(1.02)"/>
-          <use href="#mg-petal" transform="rotate(58) scale(0.9)"/><use href="#mg-vein" transform="rotate(58) scale(0.9)"/>
-          <use href="#mg-petal-sm" transform="rotate(-40) scale(1.05)"/><use href="#mg-vein-sm" transform="rotate(-40) scale(1.05)"/>
-          <use href="#mg-petal-sm" transform="rotate(-4) scale(1.1)"/><use href="#mg-vein-sm" transform="rotate(-4) scale(1.1)"/>
-          <use href="#mg-petal-sm" transform="rotate(34) scale(1)"/><use href="#mg-vein-sm" transform="rotate(34) scale(1)"/>
-          <circle r="3" fill="var(--paper)"/>
-        </g>
-        <g id="mg-bloom-sm">
-          <use href="#mg-petal-sm" transform="rotate(-130) scale(0.6)"/>
-          <use href="#mg-petal-sm" transform="rotate(130) scale(0.6)"/>
-          <use href="#mg-petal-sm" transform="rotate(-75) scale(0.78)"/><use href="#mg-vein-sm" transform="rotate(-75) scale(0.78)"/>
-          <use href="#mg-petal-sm" transform="rotate(-30) scale(0.92)"/><use href="#mg-vein-sm" transform="rotate(-30) scale(0.92)"/>
-          <use href="#mg-petal-sm" transform="rotate(14) scale(0.95)"/><use href="#mg-vein-sm" transform="rotate(14) scale(0.95)"/>
-          <use href="#mg-petal-sm" transform="rotate(60) scale(0.75)"/><use href="#mg-vein-sm" transform="rotate(60) scale(0.75)"/>
-          <circle r="2.4" fill="var(--paper)"/>
-        </g>
-        <g id="mg-bud">
-          <use href="#mg-petal-sm" transform="rotate(-18) scale(0.5)"/>
-          <use href="#mg-petal-sm" transform="rotate(6) scale(0.58)"/>
-          <use href="#mg-petal-sm" transform="rotate(26) scale(0.48)"/>
-        </g>
-        <g id="mg-leafunit"><use href="#mg-leaf"/><use href="#mg-leaf-vein"/></g>
-      </defs>
-
-      <path fill="none" d="M-6,248 C 26,206 14,178 42,156 C 68,136 58,108 88,88 C 108,74 116,58 122,40"/>
-      <path fill="none" d="M42,156 C 30,148 18,145 6,146"/>
-      <path fill="none" d="M88,88 C 78,80 68,76 56,76"/>
-
-      <use href="#mg-leafunit" transform="translate(56,76) rotate(-55) scale(0.9)"/>
-      <use href="#mg-leafunit" transform="translate(56,76) rotate(-15) scale(0.7)"/>
-      <use href="#mg-leafunit" transform="translate(6,146) rotate(200) scale(0.65)"/>
-      <use href="#mg-leafunit" transform="translate(122,40) rotate(-25) scale(0.55)"/>
-      <use href="#mg-leafunit" transform="translate(88,88) rotate(160) scale(0.6)"/>
-
-      <use href="#mg-bloom-sm" transform="translate(56,76) rotate(20) scale(1)"/>
-      <use href="#mg-bud" transform="translate(6,146) rotate(195) scale(1)"/>
-      <use href="#mg-bloom-lg" transform="translate(122,40) rotate(-10) scale(1.35)"/>
-    </svg>
-    <svg class="floral bottom-right" viewBox="-20 -40 280 280" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round">
-      <defs>
-        <path id="mg-petal2" d="M0,0 C -7,-9 -12,-19 -11,-31 C -10,-43 -4,-51 0,-55 C 4,-51 10,-43 11,-31 C 12,-19 7,-9 0,0 Z" fill="var(--paper)"/>
-        <path id="mg-petal-sm2" d="M0,0 C -5,-6 -8,-13 -7,-21 C -6,-29 -3,-34 0,-37 C 3,-34 6,-29 7,-21 C 8,-13 5,-6 0,0 Z" fill="var(--paper)"/>
-        <path id="mg-vein2" d="M0,-4 L0,-49" fill="none"/>
-        <path id="mg-vein-side2" d="M-3,-19 C -5,-26 -5,-33 -3,-39 M3,-19 C 5,-26 5,-33 3,-39" fill="none"/>
-        <path id="mg-vein-sm2" d="M0,-3 L0,-32" fill="none"/>
-        <path id="mg-leaf2" d="M0,0 C -11,-22 -11,-52 0,-70 C 11,-52 11,-22 0,0 Z" fill="var(--paper)"/>
-        <path id="mg-leaf-vein2" d="M0,-5 L0,-64 M0,-20 C -4,-25 -8,-29 -11,-33 M0,-20 C 4,-25 8,-29 11,-33 M0,-38 C -4,-42 -7,-46 -9,-51 M0,-38 C 4,-42 7,-46 9,-51" fill="none"/>
-
-        <g id="mg-bloom-lg2">
-          <use href="#mg-petal2" transform="rotate(-150) scale(0.55)"/>
-          <use href="#mg-petal2" transform="rotate(150) scale(0.55)"/>
-          <use href="#mg-petal2" transform="rotate(-110) scale(0.68)"/><use href="#mg-vein2" transform="rotate(-110) scale(0.68)"/>
-          <use href="#mg-petal2" transform="rotate(110) scale(0.68)"/><use href="#mg-vein2" transform="rotate(110) scale(0.68)"/>
-          <use href="#mg-petal2" transform="rotate(-62) scale(0.92)"/><use href="#mg-vein2" transform="rotate(-62) scale(0.92)"/>
-          <use href="#mg-petal2" transform="rotate(-24) scale(1)"/><use href="#mg-vein2" transform="rotate(-24) scale(1)"/><use href="#mg-vein-side2" transform="rotate(-24) scale(1)"/>
-          <use href="#mg-petal2" transform="rotate(18) scale(1.02)"/><use href="#mg-vein2" transform="rotate(18) scale(1.02)"/><use href="#mg-vein-side2" transform="rotate(18) scale(1.02)"/>
-          <use href="#mg-petal2" transform="rotate(58) scale(0.9)"/><use href="#mg-vein2" transform="rotate(58) scale(0.9)"/>
-          <use href="#mg-petal-sm2" transform="rotate(-40) scale(1.05)"/><use href="#mg-vein-sm2" transform="rotate(-40) scale(1.05)"/>
-          <use href="#mg-petal-sm2" transform="rotate(-4) scale(1.1)"/><use href="#mg-vein-sm2" transform="rotate(-4) scale(1.1)"/>
-          <use href="#mg-petal-sm2" transform="rotate(34) scale(1)"/><use href="#mg-vein-sm2" transform="rotate(34) scale(1)"/>
-          <circle r="3" fill="var(--paper)"/>
-        </g>
-        <g id="mg-bloom-sm3">
-          <use href="#mg-petal-sm2" transform="rotate(-130) scale(0.6)"/>
-          <use href="#mg-petal-sm2" transform="rotate(130) scale(0.6)"/>
-          <use href="#mg-petal-sm2" transform="rotate(-75) scale(0.78)"/><use href="#mg-vein-sm2" transform="rotate(-75) scale(0.78)"/>
-          <use href="#mg-petal-sm2" transform="rotate(-30) scale(0.92)"/><use href="#mg-vein-sm2" transform="rotate(-30) scale(0.92)"/>
-          <use href="#mg-petal-sm2" transform="rotate(14) scale(0.95)"/><use href="#mg-vein-sm2" transform="rotate(14) scale(0.95)"/>
-          <use href="#mg-petal-sm2" transform="rotate(60) scale(0.75)"/><use href="#mg-vein-sm2" transform="rotate(60) scale(0.75)"/>
-          <circle r="2.4" fill="var(--paper)"/>
-        </g>
-        <g id="mg-bud2">
-          <use href="#mg-petal-sm2" transform="rotate(-18) scale(0.5)"/>
-          <use href="#mg-petal-sm2" transform="rotate(6) scale(0.58)"/>
-          <use href="#mg-petal-sm2" transform="rotate(26) scale(0.48)"/>
-        </g>
-        <g id="mg-leafunit2"><use href="#mg-leaf2"/><use href="#mg-leaf-vein2"/></g>
-      </defs>
-
-      <path fill="none" d="M-6,248 C 26,206 14,178 42,156 C 68,136 58,108 88,88 C 108,74 116,58 122,40"/>
-      <path fill="none" d="M42,156 C 30,148 18,145 6,146"/>
-      <path fill="none" d="M88,88 C 78,80 68,76 56,76"/>
-
-      <use href="#mg-leafunit2" transform="translate(56,76) rotate(-55) scale(0.9)"/>
-      <use href="#mg-leafunit2" transform="translate(56,76) rotate(-15) scale(0.7)"/>
-      <use href="#mg-leafunit2" transform="translate(6,146) rotate(200) scale(0.65)"/>
-      <use href="#mg-leafunit2" transform="translate(122,40) rotate(-25) scale(0.55)"/>
-      <use href="#mg-leafunit2" transform="translate(88,88) rotate(160) scale(0.6)"/>
-
-      <use href="#mg-bloom-sm3" transform="translate(56,76) rotate(20) scale(1)"/>
-      <use href="#mg-bud2" transform="translate(6,146) rotate(195) scale(1)"/>
-      <use href="#mg-bloom-lg2" transform="translate(122,40) rotate(-10) scale(1.35)"/>
-    </svg>
+    <img class="floral-bottom" src="magnolia.png" alt="" aria-hidden="true">
 
     <div class="header">
       <p class="eyebrow">Matrimonio de</p>
