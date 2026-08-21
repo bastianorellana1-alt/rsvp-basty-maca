@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basty &amp; Maca &mdash; Confirma tu Asistencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wine: #7c1f2b;
+    --wine-dark: #5c1620;
+    --wine-soft: #a3495a;
+    --ink: #6b3a3a;
+    --cream: #faf6ee;
+    --cream-deep: #f3ecdf;
+    --paper: #fffdf9;
+    --line: #d8beb4;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; min-height: 100%; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes lineGrow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes dotPop {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes floralInLeft {
+    from { opacity: 0; transform: translate(-10px, 14px) scale(0.9); }
+    to { opacity: 0.85; transform: translate(0, 0) scale(1); }
+  }
+  @keyframes floralInRight {
+    from { opacity: 0; transform: scaleX(-1) translate(-10px, 14px) scale(0.9); }
+    to { opacity: 0.85; transform: scaleX(-1) translate(0, 0) scale(1); }
+  }
+  @keyframes successIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--ink);
+    background: linear-gradient(160deg, #efe2d8 0%, var(--cream-deep) 55%, #e8d9cd 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--paper);
+    box-shadow: 0 30px 70px -25px rgba(92, 22, 32, 0.35), 0 0 0 1px rgba(124, 31, 43, 0.08);
+    position: relative;
+    overflow: hidden;
+    animation: cardIn .8s cubic-bezier(.22,.9,.32,1) both;
+  }
+
+  .floral {
+    position: absolute;
+    color: var(--wine-soft);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .floral.bottom-left {
+    left: -18px; bottom: -14px; width: 190px; height: 190px;
+    animation: floralInLeft 1.4s ease-out .5s both;
+  }
+  .floral.bottom-right {
+    right: -18px; bottom: -14px; width: 190px; height: 190px;
+    animation: floralInRight 1.4s ease-out .6s both;
+  }
+
+  .card { padding-bottom: 170px; }
+  form { padding-bottom: 20px; }
+  footer { position: relative; z-index: 1; }
+
+  .header {
+    text-align: center;
+    padding: 46px 32px 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .eyebrow {
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--wine);
+    margin: 0 0 6px;
+    animation: fadeInUp .7s ease-out .15s both;
+  }
+
+  .names {
+    font-family: 'Great Vibes', cursive;
+    font-size: 64px;
+    line-height: 1.05;
+    color: var(--wine-dark);
+    margin: 6px 0 14px;
+    font-weight: 400;
+    animation: fadeInUp .8s ease-out .3s both;
+  }
+
+  .date-block {
+    margin: 10px 0 4px;
+    animation: fadeInUp .8s ease-out .45s both;
+  }
+  .date-block .month {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 16px;
+    color: var(--wine);
+    margin: 0 0 6px;
+  }
+  .date-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 15px;
+    color: var(--wine-dark);
+  }
+  .date-row .day {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0;
+    padding: 0 6px;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+  .year { text-align: center; font-size: 15px; letter-spacing: 3px; color: var(--wine); margin-top: 6px; }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 40px 0;
+    position: relative;
+    z-index: 1;
+  }
+  .divider span {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line), transparent);
+    animation: lineGrow .9s ease-out .6s both;
+  }
+  .divider span:first-child { transform-origin: right center; }
+  .divider span:last-child { transform-origin: left center; }
+  .divider .dot {
+    flex: none;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--wine-soft);
+    animation: dotPop .4s ease-out .95s both;
+  }
+
+  form {
+    padding: 26px 34px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .form-title {
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 34px;
+    color: var(--wine-dark);
+    margin: 0 0 2px;
+    animation: fadeInUp .7s ease-out 1.05s both;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    animation: fadeInUp .6s ease-out both;
+  }
+  .field:nth-of-type(1) { animation-delay: 1.15s; }
+  .field:nth-of-type(2) { animation-delay: 1.25s; }
+  .field:nth-of-type(3) { animation-delay: 1.35s; }
+  .field:nth-of-type(4) { animation-delay: 1.45s; }
+  #submitBtn { animation: fadeInUp .6s ease-out 1.55s both; }
+
+  label {
+    font-size: 13.5px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--wine-dark);
+  }
+  label .req { color: var(--wine-soft); }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  textarea {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    padding: 11px 4px;
+    border: none;
+    border-bottom: 1.5px solid var(--line);
+    background-image: linear-gradient(var(--wine), var(--wine));
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 0% 1.5px;
+    color: var(--ink);
+    outline: none;
+    transition: background-size .35s ease;
+    width: 100%;
+  }
+  input::placeholder, textarea::placeholder { color: #c3a9a9; font-style: italic; }
+  input:focus, textarea:focus { background-size: 100% 1.5px; }
+  textarea { resize: vertical; min-height: 78px; }
+
+  .attend-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .attend-toggle input { display: none; }
+  .attend-toggle label.opt {
+    cursor: pointer;
+    text-align: center;
+    padding: 11px 10px;
+    border: 1.5px solid var(--line);
+    background: transparent;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--wine-dark);
+    transition: all .2s ease;
+  }
+  .attend-toggle input:checked + label.opt {
+    background: var(--wine);
+    color: var(--paper);
+    border-color: var(--wine);
+    transform: scale(1.03);
+  }
+
+  button[type="submit"] {
+    margin-top: 10px;
+    border: 1.5px solid var(--wine);
+    cursor: pointer;
+    padding: 14px 20px;
+    background: var(--wine);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--paper);
+    transition: transform .15s ease, background .15s ease, opacity .15s ease;
+  }
+  button[type="submit"]:hover { background: var(--wine-dark); border-color: var(--wine-dark); transform: translateY(-1px); }
+  button[type="submit"]:active { transform: translateY(1px); }
+  button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .status { text-align: center; font-size: 14px; min-height: 18px; color: var(--wine); }
+  .status.error { color: #a3324a; }
+
+  .success-view { display: none; padding: 60px 34px 60px; text-align: center; position: relative; z-index: 1; }
+  .success-view.show { display: block; animation: successIn .6s ease-out both; }
+  form.hide { display: none; }
+
+  .success-view h2 { font-family: 'Great Vibes', cursive; color: var(--wine-dark); font-size: 40px; margin: 0 0 10px; }
+  .success-view p { color: var(--ink); font-size: 17px; line-height: 1.6; margin: 0; }
+
+  footer { text-align: center; font-size: 12px; color: rgba(92, 22, 32, 0.45); margin-top: 22px; letter-spacing: 1px; }
+
+  @media (max-width: 480px) {
+    .header { padding: 38px 24px 6px; }
+    .names { font-size: 52px; }
+    form { padding-left: 26px; padding-right: 26px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .floral.bottom-left, .floral.bottom-right { opacity: 0.85; }
+    .floral.bottom-right { transform: scaleX(-1); }
+  }
+</style>
+</head>
+<body>
+<div style="width:100%; max-width:480px;">
+  <div class="card">
+    <svg class="floral bottom-left" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="0.9" stroke-linejoin="round" stroke-linecap="round">
+      <defs>
+        <path id="mag-petal" d="M0,0 C -9,-8 -10,-25 0,-35 C 10,-25 9,-8 0,0 Z" fill="var(--paper)"/>
+        <path id="mag-vein" d="M0,-3 L0,-31" fill="none"/>
+        <path id="mag-leaf" d="M0,0 C -7,-15 -7,-40 0,-53 C 7,-40 7,-15 0,0 Z" fill="var(--paper)"/>
+        <path id="mag-leafvein" d="M0,-4 L0,-48" fill="none"/>
+        <g id="mag-leafunit"><use href="#mag-leaf"/><use href="#mag-leafvein"/></g>
+        <g id="mag-flower">
+          <use href="#mag-petal" transform="rotate(0)"/><use href="#mag-vein" transform="rotate(0)"/>
+          <use href="#mag-petal" transform="rotate(58)"/><use href="#mag-vein" transform="rotate(58)"/>
+          <use href="#mag-petal" transform="rotate(122)"/><use href="#mag-vein" transform="rotate(122)"/>
+          <use href="#mag-petal" transform="rotate(178)"/><use href="#mag-vein" transform="rotate(178)"/>
+          <use href="#mag-petal" transform="rotate(238)"/><use href="#mag-vein" transform="rotate(238)"/>
+          <use href="#mag-petal" transform="rotate(300)"/><use href="#mag-vein" transform="rotate(300)"/>
+          <circle r="3.5" fill="var(--paper)"/>
+        </g>
+        <g id="mag-bud">
+          <use href="#mag-petal" transform="rotate(-16) scale(0.55)"/>
+          <use href="#mag-petal" transform="rotate(6) scale(0.62)"/>
+          <use href="#mag-petal" transform="rotate(24) scale(0.55)"/>
+          <use href="#mag-vein" transform="rotate(4) scale(0.6)"/>
+        </g>
+      </defs>
+
+      <path fill="none" d="M-10,214 C 20,182 14,152 34,131 C 54,110 48,90 74,74 C 94,62 101,54 112,41"/>
+      <path fill="none" d="M34,131 C 42,123 48,119 55,113"/>
+      <path fill="none" d="M74,74 C 82,67 88,63 96,57"/>
+      <path fill="none" d="M50,150 C 42,145 33,143 25,141"/>
+
+      <use href="#mag-leafunit" transform="translate(55,113) rotate(-42) scale(0.75)"/>
+      <use href="#mag-leafunit" transform="translate(96,57) rotate(-25) scale(0.8)"/>
+      <use href="#mag-leafunit" transform="translate(30,146) rotate(152) scale(0.6)"/>
+      <use href="#mag-leafunit" transform="translate(112,41) rotate(-12) scale(0.5)"/>
+
+      <use href="#mag-flower" transform="translate(112,41) rotate(-8) scale(1.3)"/>
+      <use href="#mag-flower" transform="translate(60,98) rotate(14) scale(0.55)"/>
+      <use href="#mag-bud" transform="translate(25,141) rotate(198)"/>
+    </svg>
+    <svg class="floral bottom-right" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="0.9" stroke-linejoin="round" stroke-linecap="round">
+      <defs>
+        <path id="mag-petal2" d="M0,0 C -9,-8 -10,-25 0,-35 C 10,-25 9,-8 0,0 Z" fill="var(--paper)"/>
+        <path id="mag-vein2" d="M0,-3 L0,-31" fill="none"/>
+        <path id="mag-leaf2" d="M0,0 C -7,-15 -7,-40 0,-53 C 7,-40 7,-15 0,0 Z" fill="var(--paper)"/>
+        <path id="mag-leafvein2" d="M0,-4 L0,-48" fill="none"/>
+        <g id="mag-leafunit2"><use href="#mag-leaf2"/><use href="#mag-leafvein2"/></g>
+        <g id="mag-flower2">
+          <use href="#mag-petal2" transform="rotate(0)"/><use href="#mag-vein2" transform="rotate(0)"/>
+          <use href="#mag-petal2" transform="rotate(58)"/><use href="#mag-vein2" transform="rotate(58)"/>
+          <use href="#mag-petal2" transform="rotate(122)"/><use href="#mag-vein2" transform="rotate(122)"/>
+          <use href="#mag-petal2" transform="rotate(178)"/><use href="#mag-vein2" transform="rotate(178)"/>
+          <use href="#mag-petal2" transform="rotate(238)"/><use href="#mag-vein2" transform="rotate(238)"/>
+          <use href="#mag-petal2" transform="rotate(300)"/><use href="#mag-vein2" transform="rotate(300)"/>
+          <circle r="3.5" fill="var(--paper)"/>
+        </g>
+        <g id="mag-bud2">
+          <use href="#mag-petal2" transform="rotate(-16) scale(0.55)"/>
+          <use href="#mag-petal2" transform="rotate(6) scale(0.62)"/>
+          <use href="#mag-petal2" transform="rotate(24) scale(0.55)"/>
+          <use href="#mag-vein2" transform="rotate(4) scale(0.6)"/>
+        </g>
+      </defs>
+
+      <path fill="none" d="M-10,214 C 20,182 14,152 34,131 C 54,110 48,90 74,74 C 94,62 101,54 112,41"/>
+      <path fill="none" d="M34,131 C 42,123 48,119 55,113"/>
+      <path fill="none" d="M74,74 C 82,67 88,63 96,57"/>
+      <path fill="none" d="M50,150 C 42,145 33,143 25,141"/>
+
+      <use href="#mag-leafunit2" transform="translate(55,113) rotate(-42) scale(0.75)"/>
+      <use href="#mag-leafunit2" transform="translate(96,57) rotate(-25) scale(0.8)"/>
+      <use href="#mag-leafunit2" transform="translate(30,146) rotate(152) scale(0.6)"/>
+      <use href="#mag-leafunit2" transform="translate(112,41) rotate(-12) scale(0.5)"/>
+
+      <use href="#mag-flower2" transform="translate(112,41) rotate(-8) scale(1.3)"/>
+      <use href="#mag-flower2" transform="translate(60,98) rotate(14) scale(0.55)"/>
+      <use href="#mag-bud2" transform="translate(25,141) rotate(198)"/>
+    </svg>
+
+    <div class="header">
+      <p class="eyebrow">Matrimonio de</p>
+      <h1 class="names">Basty &amp; Maca</h1>
+      <div class="date-block">
+        <p class="month">Noviembre</p>
+        <div class="date-row">
+          <span>S&aacute;bado</span>
+          <span class="day">21</span>
+          <span>5:00 PM</span>
+        </div>
+        <p class="year">2026</p>
+      </div>
+    </div>
+
+    <div class="divider" style="padding-top:26px"><span></span><span class="dot"></span><span></span></div>
+
+    <form id="rsvpForm">
+      <h2 class="form-title">Confirmaci&oacute;n de asistencia</h2>
+
+      <div class="field">
+        <label for="nombre">Nombre completo <span class="req">*</span></label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej. Mar&iacute;a Gonz&aacute;lez" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Correo electr&oacute;nico</label>
+        <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com">
+      </div>
+
+      <div class="field">
+        <label>&iquest;Asistir&aacute;s? <span class="req">*</span></label>
+        <div class="attend-toggle">
+          <input type="radio" id="asiste-si" name="asiste" value="Sí" required>
+          <label class="opt" for="asiste-si">S&iacute;, asistir&eacute;</label>
+          <input type="radio" id="asiste-no" name="asiste" value="No" required>
+          <label class="opt" for="asiste-no">No podr&eacute;</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="mensaje">Comentarios / restricciones alimenticias</label>
+        <textarea id="mensaje" name="mensaje" placeholder="Alergias, mensaje o cualquier detalle que quieras compartir"></textarea>
+      </div>
+
+      <button type="submit" id="submitBtn">Enviar confirmaci&oacute;n</button>
+      <div class="status" id="statusMsg"></div>
+    </form>
+
+    <div class="success-view" id="successView">
+      <h2>&iexcl;Gracias!</h2>
+      <p>Hemos recibido tu confirmaci&oacute;n.<br>Nos vemos el 21 de noviembre.</p>
+    </div>
+  </div>
+  <footer>Basty &amp; Maca &middot; 21 de noviembre de 2026</footer>
+</div>
+
+<script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyywIkjoRjfr1aWFM9xXwn3nQQ37Mefq1Qzn32YUHDYq-YWsWzDVLjJse4WzJhPgAOw/exec";
+
+  const form = document.getElementById('rsvpForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const statusMsg = document.getElementById('statusMsg');
+  const successView = document.getElementById('successView');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (SCRIPT_URL.includes('PEGA_AQUI')) {
+      statusMsg.textContent = 'Falta configurar la URL de Google Apps Script en el archivo index.html.';
+      statusMsg.classList.add('error');
+      return;
+    }
+
+    statusMsg.classList.remove('error');
+    statusMsg.textContent = 'Enviando...';
+    submitBtn.disabled = true;
+
+    const formData = new FormData(form);
+    const params = new URLSearchParams();
+    for (const [key, value] of formData.entries()) {
+      params.append(key, value);
+    }
+    params.append('fecha', new Date().toISOString());
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: params
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.result === 'success') {
+          form.classList.add('hide');
+          successView.classList.add('show');
+        } else {
+          throw new Error((data && data.error) || 'Error desconocido');
+        }
+      })
+      .catch(err => {
+        statusMsg.textContent = 'Ocurrió un error al enviar. Intenta de nuevo.';
+        statusMsg.classList.add('error');
+        submitBtn.disabled = false;
+        console.error(err);
+      });
+  });
+</script>
+</body>
+</html>
