@@ -321,6 +321,8 @@
   .petal:nth-child(5) { left: 75%; animation-delay: .4s; }
   .petal:nth-child(6) { left: 88%; animation-delay: .7s; background: var(--wine); }
 
+  .success-view.declined .petals { display: none; }
+
   .heart-icon { display: block; margin: 0 auto 14px; position: relative; z-index: 1; animation: heartPop .4s ease-out 1.05s both; }
   .heart-path {
     animation: drawHeart 1s ease-out .15s forwards, heartFill .5s ease-out 1.1s forwards;
@@ -498,8 +500,8 @@
       <svg class="heart-icon" width="46" height="46" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path class="heart-path" d="M23.6 4c-3.4 0-6 2.6-7.6 5.2C14.4 6.6 11.8 4 8.4 4 4.1 4 1 7.5 1 11.8c0 6.6 6.4 11.9 15 20 8.6-8.1 15-13.4 15-20C31 7.5 27.9 4 23.6 4z" stroke="var(--wine)" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
       </svg>
-      <h2>&iexcl;Muchas gracias por confirmar tu asistencia!</h2>
-      <p>Estamos felices de poder compartir este momento contigo y esperamos verte el 21 de noviembre de 2026.</p>
+      <h2 id="successTitle">&iexcl;Muchas gracias por confirmar tu asistencia!</h2>
+      <p id="successMsg">Estamos felices de poder compartir este momento contigo y esperamos verte el 21 de noviembre de 2026.</p>
     </div>
   </div>
   <footer>Basty &amp; Maca &middot; 21 de noviembre de 2026</footer>
@@ -512,6 +514,19 @@
   const submitBtn = document.getElementById('submitBtn');
   const statusMsg = document.getElementById('statusMsg');
   const successView = document.getElementById('successView');
+  const successTitle = document.getElementById('successTitle');
+  const successMsg = document.getElementById('successMsg');
+
+  const MESSAGES = {
+    'Sí': {
+      title: '¡Muchas gracias por confirmar tu asistencia!',
+      msg: 'Estamos felices de poder compartir este momento contigo y esperamos verte el 21 de noviembre de 2026.'
+    },
+    'No': {
+      title: '¡Gracias por avisarnos! 💕',
+      msg: 'Nos hubiese encantado compartir este momento contigo, pero entendemos que a veces no es posible. Te mandamos un abrazo grande y mucho cariño.'
+    }
+  };
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -527,6 +542,7 @@
     submitBtn.disabled = true;
 
     const formData = new FormData(form);
+    const asiste = formData.get('asiste');
     const params = new URLSearchParams();
     for (const [key, value] of formData.entries()) {
       params.append(key, value);
@@ -540,6 +556,10 @@
       .then(res => res.json())
       .then(data => {
         if (data && data.result === 'success') {
+          const copy = MESSAGES[asiste] || MESSAGES['Sí'];
+          successTitle.textContent = copy.title;
+          successMsg.textContent = copy.msg;
+          successView.classList.toggle('declined', asiste === 'No');
           form.classList.add('hide');
           successView.classList.add('show');
         } else {
