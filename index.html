@@ -101,15 +101,15 @@
     pointer-events: none;
   }
   .floral.bottom-left {
-    left: -18px; bottom: -14px; width: 190px; height: 190px;
+    left: 0; bottom: 0; width: 208px; height: 208px;
     animation: floralInLeft 1.4s ease-out .5s both;
   }
   .floral.bottom-right {
-    right: -18px; bottom: -14px; width: 190px; height: 190px;
+    right: 0; bottom: 0; width: 208px; height: 208px;
     animation: floralInRight 1.4s ease-out .6s both;
   }
 
-  .card { padding-bottom: 170px; }
+  .card { padding-bottom: 200px; }
   form { padding-bottom: 20px; }
   footer { position: relative; z-index: 1; }
 
@@ -406,81 +406,125 @@
 <body>
 <div style="width:100%; max-width:480px;">
   <div class="card">
-    <svg class="floral bottom-left" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="0.9" stroke-linejoin="round" stroke-linecap="round">
+    <svg class="floral bottom-left" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="0.85" stroke-linejoin="round" stroke-linecap="round">
       <defs>
-        <path id="mag-petal" d="M0,0 C -9,-8 -10,-25 0,-35 C 10,-25 9,-8 0,0 Z" fill="var(--paper)"/>
-        <path id="mag-vein" d="M0,-3 L0,-31" fill="none"/>
-        <path id="mag-leaf" d="M0,0 C -7,-15 -7,-40 0,-53 C 7,-40 7,-15 0,0 Z" fill="var(--paper)"/>
-        <path id="mag-leafvein" d="M0,-4 L0,-48" fill="none"/>
-        <g id="mag-leafunit"><use href="#mag-leaf"/><use href="#mag-leafvein"/></g>
-        <g id="mag-flower">
-          <use href="#mag-petal" transform="rotate(0)"/><use href="#mag-vein" transform="rotate(0)"/>
-          <use href="#mag-petal" transform="rotate(58)"/><use href="#mag-vein" transform="rotate(58)"/>
-          <use href="#mag-petal" transform="rotate(122)"/><use href="#mag-vein" transform="rotate(122)"/>
-          <use href="#mag-petal" transform="rotate(178)"/><use href="#mag-vein" transform="rotate(178)"/>
-          <use href="#mag-petal" transform="rotate(238)"/><use href="#mag-vein" transform="rotate(238)"/>
-          <use href="#mag-petal" transform="rotate(300)"/><use href="#mag-vein" transform="rotate(300)"/>
-          <circle r="3.5" fill="var(--paper)"/>
+        <path id="t-petal-o" d="M0,0 C -7,-11 -8,-30 0,-42 C 8,-30 7,-11 0,0 Z" fill="var(--paper)"/>
+        <path id="t-petal-i" d="M0,0 C -5,-7 -5.5,-20 0,-28 C 5.5,-20 5,-7 0,0 Z" fill="var(--paper)"/>
+        <path id="t-vein-o" d="M0,-3 L0,-37" fill="none"/>
+        <path id="t-vein-i" d="M0,-2 L0,-25" fill="none"/>
+        <path id="t-leaf" d="M0,0 C -13,-4 -19,-17 -12,-27 C -7,-34 4,-33 6,-23 C 9,-13 3,-5 0,0 Z" fill="var(--paper)"/>
+        <path id="t-leaf-curl" d="M-2,-5 C -8,-11 -8,-19 -3,-25" fill="none"/>
+
+        <g id="t-mandala">
+          <use href="#t-petal-o" transform="rotate(0)"/><use href="#t-vein-o" transform="rotate(0)"/>
+          <use href="#t-petal-o" transform="rotate(45)"/><use href="#t-vein-o" transform="rotate(45)"/>
+          <use href="#t-petal-o" transform="rotate(90)"/><use href="#t-vein-o" transform="rotate(90)"/>
+          <use href="#t-petal-o" transform="rotate(135)"/><use href="#t-vein-o" transform="rotate(135)"/>
+          <use href="#t-petal-o" transform="rotate(180)"/><use href="#t-vein-o" transform="rotate(180)"/>
+          <use href="#t-petal-o" transform="rotate(225)"/><use href="#t-vein-o" transform="rotate(225)"/>
+          <use href="#t-petal-o" transform="rotate(270)"/><use href="#t-vein-o" transform="rotate(270)"/>
+          <use href="#t-petal-o" transform="rotate(315)"/><use href="#t-vein-o" transform="rotate(315)"/>
+          <use href="#t-petal-i" transform="rotate(22.5) scale(0.85)"/>
+          <use href="#t-petal-i" transform="rotate(67.5) scale(0.85)"/>
+          <use href="#t-petal-i" transform="rotate(112.5) scale(0.85)"/>
+          <use href="#t-petal-i" transform="rotate(157.5) scale(0.85)"/>
+          <use href="#t-petal-i" transform="rotate(202.5) scale(0.85)"/>
+          <use href="#t-petal-i" transform="rotate(247.5) scale(0.85)"/>
+          <use href="#t-petal-i" transform="rotate(292.5) scale(0.85)"/>
+          <use href="#t-petal-i" transform="rotate(337.5) scale(0.85)"/>
+          <circle r="6" fill="none"/>
+          <circle r="2" fill="var(--paper)"/>
         </g>
-        <g id="mag-bud">
-          <use href="#mag-petal" transform="rotate(-16) scale(0.55)"/>
-          <use href="#mag-petal" transform="rotate(6) scale(0.62)"/>
-          <use href="#mag-petal" transform="rotate(24) scale(0.55)"/>
-          <use href="#mag-vein" transform="rotate(4) scale(0.6)"/>
+        <g id="t-bloom-sm">
+          <use href="#t-petal-i" transform="rotate(0) scale(0.75)"/><use href="#t-vein-i" transform="rotate(0) scale(0.75)"/>
+          <use href="#t-petal-i" transform="rotate(60) scale(0.75)"/><use href="#t-vein-i" transform="rotate(60) scale(0.75)"/>
+          <use href="#t-petal-i" transform="rotate(120) scale(0.75)"/><use href="#t-vein-i" transform="rotate(120) scale(0.75)"/>
+          <use href="#t-petal-i" transform="rotate(180) scale(0.75)"/><use href="#t-vein-i" transform="rotate(180) scale(0.75)"/>
+          <use href="#t-petal-i" transform="rotate(240) scale(0.75)"/><use href="#t-vein-i" transform="rotate(240) scale(0.75)"/>
+          <use href="#t-petal-i" transform="rotate(300) scale(0.75)"/><use href="#t-vein-i" transform="rotate(300) scale(0.75)"/>
+          <circle r="3" fill="none"/>
+        </g>
+        <g id="t-leafunit"><use href="#t-leaf"/><use href="#t-leaf-curl"/></g>
+        <g id="t-dots">
+          <circle r="2.4" cx="0" cy="0" fill="currentColor" stroke="none"/>
+          <circle r="1.6" cx="-6" cy="4" fill="currentColor" stroke="none"/>
+          <circle r="1" cx="-10.5" cy="9.5" fill="currentColor" stroke="none"/>
         </g>
       </defs>
 
-      <path fill="none" d="M-10,214 C 20,182 14,152 34,131 C 54,110 48,90 74,74 C 94,62 101,54 112,41"/>
-      <path fill="none" d="M34,131 C 42,123 48,119 55,113"/>
-      <path fill="none" d="M74,74 C 82,67 88,63 96,57"/>
-      <path fill="none" d="M50,150 C 42,145 33,143 25,141"/>
+      <path fill="none" d="M-6,246 C 24,208 16,180 40,160 C 62,142 56,118 80,102 C 98,90 104,76 112,60"/>
+      <path fill="none" d="M112,60 C 118,52 130,50 132,40 C 134,32 126,26 119,29 C 113,32 115,39 121,39"/>
+      <path fill="none" d="M62,141 C 52,134 42,131 30,131"/>
+      <path fill="none" d="M40,160 C 32,154 24,152 16,153"/>
 
-      <use href="#mag-leafunit" transform="translate(55,113) rotate(-42) scale(0.75)"/>
-      <use href="#mag-leafunit" transform="translate(96,57) rotate(-25) scale(0.8)"/>
-      <use href="#mag-leafunit" transform="translate(30,146) rotate(152) scale(0.6)"/>
-      <use href="#mag-leafunit" transform="translate(112,41) rotate(-12) scale(0.5)"/>
+      <use href="#t-leafunit" transform="translate(56,114) rotate(-40) scale(0.85)"/>
+      <use href="#t-leafunit" transform="translate(94,58) rotate(-20) scale(0.8)"/>
+      <use href="#t-leafunit" transform="translate(30,131) rotate(198) scale(0.7)"/>
+      <use href="#t-leafunit" transform="translate(112,60) rotate(-6) scale(0.55)"/>
 
-      <use href="#mag-flower" transform="translate(112,41) rotate(-8) scale(1.3)"/>
-      <use href="#mag-flower" transform="translate(60,98) rotate(14) scale(0.55)"/>
-      <use href="#mag-bud" transform="translate(25,141) rotate(198)"/>
+      <use href="#t-mandala" transform="translate(112,60) rotate(-6) scale(1)"/>
+      <use href="#t-bloom-sm" transform="translate(30,131) rotate(18) scale(1)"/>
+      <use href="#t-dots" transform="translate(16,153) rotate(210)"/>
     </svg>
-    <svg class="floral bottom-right" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="0.9" stroke-linejoin="round" stroke-linecap="round">
+    <svg class="floral bottom-right" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="0.85" stroke-linejoin="round" stroke-linecap="round">
       <defs>
-        <path id="mag-petal2" d="M0,0 C -9,-8 -10,-25 0,-35 C 10,-25 9,-8 0,0 Z" fill="var(--paper)"/>
-        <path id="mag-vein2" d="M0,-3 L0,-31" fill="none"/>
-        <path id="mag-leaf2" d="M0,0 C -7,-15 -7,-40 0,-53 C 7,-40 7,-15 0,0 Z" fill="var(--paper)"/>
-        <path id="mag-leafvein2" d="M0,-4 L0,-48" fill="none"/>
-        <g id="mag-leafunit2"><use href="#mag-leaf2"/><use href="#mag-leafvein2"/></g>
-        <g id="mag-flower2">
-          <use href="#mag-petal2" transform="rotate(0)"/><use href="#mag-vein2" transform="rotate(0)"/>
-          <use href="#mag-petal2" transform="rotate(58)"/><use href="#mag-vein2" transform="rotate(58)"/>
-          <use href="#mag-petal2" transform="rotate(122)"/><use href="#mag-vein2" transform="rotate(122)"/>
-          <use href="#mag-petal2" transform="rotate(178)"/><use href="#mag-vein2" transform="rotate(178)"/>
-          <use href="#mag-petal2" transform="rotate(238)"/><use href="#mag-vein2" transform="rotate(238)"/>
-          <use href="#mag-petal2" transform="rotate(300)"/><use href="#mag-vein2" transform="rotate(300)"/>
-          <circle r="3.5" fill="var(--paper)"/>
+        <path id="t-petal-o2" d="M0,0 C -7,-11 -8,-30 0,-42 C 8,-30 7,-11 0,0 Z" fill="var(--paper)"/>
+        <path id="t-petal-i2" d="M0,0 C -5,-7 -5.5,-20 0,-28 C 5.5,-20 5,-7 0,0 Z" fill="var(--paper)"/>
+        <path id="t-vein-o2" d="M0,-3 L0,-37" fill="none"/>
+        <path id="t-vein-i2" d="M0,-2 L0,-25" fill="none"/>
+        <path id="t-leaf2" d="M0,0 C -13,-4 -19,-17 -12,-27 C -7,-34 4,-33 6,-23 C 9,-13 3,-5 0,0 Z" fill="var(--paper)"/>
+        <path id="t-leaf-curl2" d="M-2,-5 C -8,-11 -8,-19 -3,-25" fill="none"/>
+
+        <g id="t-mandala2">
+          <use href="#t-petal-o2" transform="rotate(0)"/><use href="#t-vein-o2" transform="rotate(0)"/>
+          <use href="#t-petal-o2" transform="rotate(45)"/><use href="#t-vein-o2" transform="rotate(45)"/>
+          <use href="#t-petal-o2" transform="rotate(90)"/><use href="#t-vein-o2" transform="rotate(90)"/>
+          <use href="#t-petal-o2" transform="rotate(135)"/><use href="#t-vein-o2" transform="rotate(135)"/>
+          <use href="#t-petal-o2" transform="rotate(180)"/><use href="#t-vein-o2" transform="rotate(180)"/>
+          <use href="#t-petal-o2" transform="rotate(225)"/><use href="#t-vein-o2" transform="rotate(225)"/>
+          <use href="#t-petal-o2" transform="rotate(270)"/><use href="#t-vein-o2" transform="rotate(270)"/>
+          <use href="#t-petal-o2" transform="rotate(315)"/><use href="#t-vein-o2" transform="rotate(315)"/>
+          <use href="#t-petal-i2" transform="rotate(22.5) scale(0.85)"/>
+          <use href="#t-petal-i2" transform="rotate(67.5) scale(0.85)"/>
+          <use href="#t-petal-i2" transform="rotate(112.5) scale(0.85)"/>
+          <use href="#t-petal-i2" transform="rotate(157.5) scale(0.85)"/>
+          <use href="#t-petal-i2" transform="rotate(202.5) scale(0.85)"/>
+          <use href="#t-petal-i2" transform="rotate(247.5) scale(0.85)"/>
+          <use href="#t-petal-i2" transform="rotate(292.5) scale(0.85)"/>
+          <use href="#t-petal-i2" transform="rotate(337.5) scale(0.85)"/>
+          <circle r="6" fill="none"/>
+          <circle r="2" fill="var(--paper)"/>
         </g>
-        <g id="mag-bud2">
-          <use href="#mag-petal2" transform="rotate(-16) scale(0.55)"/>
-          <use href="#mag-petal2" transform="rotate(6) scale(0.62)"/>
-          <use href="#mag-petal2" transform="rotate(24) scale(0.55)"/>
-          <use href="#mag-vein2" transform="rotate(4) scale(0.6)"/>
+        <g id="t-bloom-sm2">
+          <use href="#t-petal-i2" transform="rotate(0) scale(0.75)"/><use href="#t-vein-i2" transform="rotate(0) scale(0.75)"/>
+          <use href="#t-petal-i2" transform="rotate(60) scale(0.75)"/><use href="#t-vein-i2" transform="rotate(60) scale(0.75)"/>
+          <use href="#t-petal-i2" transform="rotate(120) scale(0.75)"/><use href="#t-vein-i2" transform="rotate(120) scale(0.75)"/>
+          <use href="#t-petal-i2" transform="rotate(180) scale(0.75)"/><use href="#t-vein-i2" transform="rotate(180) scale(0.75)"/>
+          <use href="#t-petal-i2" transform="rotate(240) scale(0.75)"/><use href="#t-vein-i2" transform="rotate(240) scale(0.75)"/>
+          <use href="#t-petal-i2" transform="rotate(300) scale(0.75)"/><use href="#t-vein-i2" transform="rotate(300) scale(0.75)"/>
+          <circle r="3" fill="none"/>
+        </g>
+        <g id="t-leafunit2"><use href="#t-leaf2"/><use href="#t-leaf-curl2"/></g>
+        <g id="t-dots2">
+          <circle r="2.4" cx="0" cy="0" fill="currentColor" stroke="none"/>
+          <circle r="1.6" cx="-6" cy="4" fill="currentColor" stroke="none"/>
+          <circle r="1" cx="-10.5" cy="9.5" fill="currentColor" stroke="none"/>
         </g>
       </defs>
 
-      <path fill="none" d="M-10,214 C 20,182 14,152 34,131 C 54,110 48,90 74,74 C 94,62 101,54 112,41"/>
-      <path fill="none" d="M34,131 C 42,123 48,119 55,113"/>
-      <path fill="none" d="M74,74 C 82,67 88,63 96,57"/>
-      <path fill="none" d="M50,150 C 42,145 33,143 25,141"/>
+      <path fill="none" d="M-6,246 C 24,208 16,180 40,160 C 62,142 56,118 80,102 C 98,90 104,76 112,60"/>
+      <path fill="none" d="M112,60 C 118,52 130,50 132,40 C 134,32 126,26 119,29 C 113,32 115,39 121,39"/>
+      <path fill="none" d="M62,141 C 52,134 42,131 30,131"/>
+      <path fill="none" d="M40,160 C 32,154 24,152 16,153"/>
 
-      <use href="#mag-leafunit2" transform="translate(55,113) rotate(-42) scale(0.75)"/>
-      <use href="#mag-leafunit2" transform="translate(96,57) rotate(-25) scale(0.8)"/>
-      <use href="#mag-leafunit2" transform="translate(30,146) rotate(152) scale(0.6)"/>
-      <use href="#mag-leafunit2" transform="translate(112,41) rotate(-12) scale(0.5)"/>
+      <use href="#t-leafunit2" transform="translate(56,114) rotate(-40) scale(0.85)"/>
+      <use href="#t-leafunit2" transform="translate(94,58) rotate(-20) scale(0.8)"/>
+      <use href="#t-leafunit2" transform="translate(30,131) rotate(198) scale(0.7)"/>
+      <use href="#t-leafunit2" transform="translate(112,60) rotate(-6) scale(0.55)"/>
 
-      <use href="#mag-flower2" transform="translate(112,41) rotate(-8) scale(1.3)"/>
-      <use href="#mag-flower2" transform="translate(60,98) rotate(14) scale(0.55)"/>
-      <use href="#mag-bud2" transform="translate(25,141) rotate(198)"/>
+      <use href="#t-mandala2" transform="translate(112,60) rotate(-6) scale(1)"/>
+      <use href="#t-bloom-sm2" transform="translate(30,131) rotate(18) scale(1)"/>
+      <use href="#t-dots2" transform="translate(16,153) rotate(210)"/>
     </svg>
 
     <div class="header">
