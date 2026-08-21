@@ -70,7 +70,13 @@
   body {
     font-family: 'Cormorant Garamond', serif;
     color: var(--ink);
-    background: linear-gradient(160deg, #efe2d8 0%, var(--cream-deep) 55%, #e8d9cd 100%);
+    background-color: #1c0509;
+    background-image:
+      radial-gradient(ellipse 55% 38% at 12% 28%, rgba(168,104,88,0.4), transparent 62%),
+      radial-gradient(ellipse 50% 34% at 6% 78%, rgba(150,92,74,0.32), transparent 60%),
+      radial-gradient(ellipse 58% 42% at 88% 82%, rgba(176,110,92,0.34), transparent 65%),
+      radial-gradient(ellipse 48% 36% at 92% 18%, rgba(110,40,42,0.3), transparent 60%),
+      linear-gradient(155deg, #1a0508 0%, #3d0f16 38%, #260a0f 68%, #150406 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
