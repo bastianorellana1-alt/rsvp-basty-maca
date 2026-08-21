@@ -323,6 +323,45 @@
 
   .success-view.declined .petals { display: none; }
 
+  .location-block {
+    display: none;
+    margin-top: 26px;
+    position: relative;
+    z-index: 1;
+  }
+  .success-view.show .location-block.visible {
+    display: block;
+    animation: fadeInUp .6s ease-out 1.5s both;
+  }
+  .location-block .divider { padding-left: 0; padding-right: 0; margin-bottom: 16px; }
+  .location-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--wine);
+    margin: 0 0 8px;
+  }
+  .location-address {
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0 0 16px;
+  }
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    border: 1.5px solid var(--wine);
+    color: var(--wine-dark);
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background .2s ease, color .2s ease;
+  }
+  .map-link:hover { background: var(--wine); color: var(--paper); }
+
   .heart-icon { display: block; margin: 0 auto 14px; position: relative; z-index: 1; animation: heartPop .4s ease-out 1.05s both; }
   .heart-path {
     animation: drawHeart 1s ease-out .15s forwards, heartFill .5s ease-out 1.1s forwards;
@@ -502,6 +541,16 @@
       </svg>
       <h2 id="successTitle">&iexcl;Muchas gracias por confirmar tu asistencia!</h2>
       <p id="successMsg">Estamos felices de poder compartir este momento contigo y esperamos verte el 21 de noviembre de 2026.</p>
+
+      <div class="location-block" id="locationBlock">
+        <div class="divider" style="padding-top:0"><span></span><span class="dot"></span><span></span></div>
+        <p class="location-label">Direcci&oacute;n</p>
+        <p class="location-address">Camino Los Naranjos, San Bernardo<br>Regi&oacute;n Metropolitana</p>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Camino+Los+Naranjos%2C+San+Bernardo%2C+Regi%C3%B3n+Metropolitana" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 13-9 13s-9-7-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Ver ubicaci&oacute;n en el mapa
+        </a>
+      </div>
     </div>
   </div>
   <footer>Basty &amp; Maca &middot; 21 de noviembre de 2026</footer>
@@ -516,6 +565,7 @@
   const successView = document.getElementById('successView');
   const successTitle = document.getElementById('successTitle');
   const successMsg = document.getElementById('successMsg');
+  const locationBlock = document.getElementById('locationBlock');
 
   const MESSAGES = {
     'Sí': {
@@ -560,6 +610,7 @@
           successTitle.textContent = copy.title;
           successMsg.textContent = copy.msg;
           successView.classList.toggle('declined', asiste === 'No');
+          locationBlock.classList.toggle('visible', asiste === 'Sí');
           form.classList.add('hide');
           successView.classList.add('show');
         } else {
