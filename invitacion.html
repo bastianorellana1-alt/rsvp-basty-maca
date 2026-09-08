@@ -435,38 +435,6 @@
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
   .reveal.in-view { opacity: 1; transform: translateY(0); }
 
-  /* ---------- Sticky CTA ---------- */
-  .sticky-cta {
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    z-index: 40;
-    display: flex;
-    justify-content: center;
-    padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
-    background: linear-gradient(180deg, rgba(28,5,9,0) 0%, rgba(28,5,9,0.55) 35%, rgba(28,5,9,0.85) 100%);
-    transform: translateY(120%);
-    transition: transform .35s ease;
-    pointer-events: none;
-  }
-  .sticky-cta.show { transform: translateY(0); pointer-events: auto; }
-  .sticky-cta-btn {
-    display: inline-block;
-    width: 100%;
-    max-width: 448px;
-    text-align: center;
-    background: var(--wine);
-    border: 1.5px solid var(--wine-soft);
-    color: var(--paper);
-    text-decoration: none;
-    padding: 14px 20px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    box-shadow: 0 12px 24px -10px rgba(0,0,0,0.5);
-  }
-
   @media (max-width: 480px) {
     .header { padding: 38px 24px 6px; }
     .names { font-size: 52px; }
@@ -595,10 +563,6 @@
   <footer>Basty &amp; Maca &middot; 21 de noviembre de 2026</footer>
 </div>
 
-<div class="sticky-cta" id="stickyCta">
-  <a href="index.html" class="sticky-cta-btn">Confirmar asistencia</a>
-</div>
-
 <script>
   // Reveal on scroll
   const items = document.querySelectorAll('.reveal');
@@ -666,31 +630,6 @@
     }
     tick();
     const timer = setInterval(tick, 1000);
-  })();
-
-  // Sticky CTA visibility
-  (function () {
-    const stickyCta = document.getElementById('stickyCta');
-    const hero = document.getElementById('hero');
-    const mainCta = document.getElementById('mainCta');
-    let pastHero = false;
-    let nearCta = false;
-
-    function update() {
-      stickyCta.classList.toggle('show', pastHero && !nearCta);
-    }
-
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver((entries) => {
-        entries.forEach(entry => { pastHero = !entry.isIntersecting; });
-        update();
-      }, { rootMargin: '-60px 0px 0px 0px', threshold: 0 }).observe(hero);
-
-      new IntersectionObserver((entries) => {
-        entries.forEach(entry => { nearCta = entry.isIntersecting; });
-        update();
-      }, { threshold: 0.2 }).observe(mainCta);
-    }
   })();
 </script>
 </body>
