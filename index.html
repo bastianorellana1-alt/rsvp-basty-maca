@@ -286,11 +286,29 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--paper);
+    position: relative;
     transition: transform .15s ease, background .15s ease, opacity .15s ease;
   }
   button[type="submit"]:hover { background: var(--wine-dark); border-color: var(--wine-dark); transform: translateY(-1px); }
   button[type="submit"]:active { transform: translateY(1px); }
-  button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+  button[type="submit"]:disabled { opacity: 0.85; cursor: not-allowed; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .btn-spinner {
+    display: none;
+    width: 17px;
+    height: 17px;
+    border: 2px solid rgba(255,253,249,0.35);
+    border-top-color: var(--paper);
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -9px 0 0 -9px;
+    animation: spin .7s linear infinite;
+  }
+  #submitBtn.loading .btn-text { visibility: hidden; }
+  #submitBtn.loading .btn-spinner { display: block; }
 
   .status { text-align: center; font-size: 14px; min-height: 18px; color: var(--wine); }
   .status.error { color: #a3324a; }
@@ -447,7 +465,7 @@
         <textarea id="mensaje" name="mensaje" placeholder="Alergias, mensaje o cualquier detalle que quieras compartir"></textarea>
       </div>
 
-      <button type="submit" id="submitBtn">Enviar confirmaci&oacute;n</button>
+      <button type="submit" id="submitBtn"><span class="btn-text">Enviar confirmaci&oacute;n</span><span class="btn-spinner" aria-hidden="true"></span></button>
       <div class="status" id="statusMsg"></div>
     </form>
 
@@ -508,8 +526,9 @@
     }
 
     statusMsg.classList.remove('error');
-    statusMsg.textContent = 'Enviando...';
+    statusMsg.textContent = '';
     submitBtn.disabled = true;
+    submitBtn.classList.add('loading');
 
     const formData = new FormData(form);
     const asiste = formData.get('asiste');
@@ -541,6 +560,7 @@
         statusMsg.textContent = 'Ocurrió un error al enviar. Intenta de nuevo.';
         statusMsg.classList.add('error');
         submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
         console.error(err);
       });
   });
