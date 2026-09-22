@@ -7,7 +7,7 @@
 <meta name="description" content="Matrimonio de Basty &amp; Maca &mdash; S&aacute;bado 21 de noviembre de 2026.">
 <meta property="og:title" content="Matrimonio de Basty &amp; Maca">
 <meta property="og:description" content="S&aacute;bado 21 de noviembre de 2026 &middot; 5:00 PM">
-<meta property="og:image" content="foto1.jpg">
+<meta property="og:image" content="bn1.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -363,7 +363,7 @@
     position: relative;
     margin-top: 6px;
     overflow: hidden;
-    background: var(--blush);
+    background: var(--paper);
     border: 1px solid var(--line);
     touch-action: pan-y;
   }
@@ -372,13 +372,22 @@
     transition: transform .55s cubic-bezier(.4, 0, .2, 1);
     will-change: transform;
   }
-  .slide { flex: 0 0 100%; min-width: 0; }
+  .slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .slide img {
     display: block;
     width: 100%;
     height: auto;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    object-position: center;
+    border: 1px solid rgba(124, 31, 43, 0.16);
     -webkit-user-drag: none;
     user-select: none;
   }
@@ -617,13 +626,13 @@
 
       <div class="carousel" id="carousel">
         <div class="carousel-track" id="carTrack">
-          <div class="slide"><img src="foto1.jpg" alt="Basty y Maca" width="1100" height="1100" decoding="async"></div>
-          <div class="slide"><img src="foto2.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="foto3.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="foto4.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="foto5.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="foto6.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
-          <div class="slide"><img src="foto7.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
+          <div class="slide"><img src="bn1.jpg" alt="Basty y Maca" width="1100" height="1100" decoding="async"></div>
+          <div class="slide"><img src="bn2.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
+          <div class="slide"><img src="bn3.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
+          <div class="slide"><img src="bn4.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
+          <div class="slide"><img src="bn5.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
+          <div class="slide"><img src="bn6.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
+          <div class="slide"><img src="bn7.jpg" alt="Basty y Maca" width="1100" height="1100" loading="lazy" decoding="async"></div>
         </div>
         <button class="car-nav prev" id="carPrev" type="button" aria-label="Foto anterior">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
