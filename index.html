@@ -220,7 +220,11 @@
   .field:nth-of-type(2) { animation-delay: 1.25s; }
   .field:nth-of-type(3) { animation-delay: 1.35s; }
   .field:nth-of-type(4) { animation-delay: 1.45s; }
+  #mensajeField { animation-delay: 1.45s; }
   #submitBtn { animation: fadeInUp .6s ease-out 1.55s both; }
+
+  [hidden] { display: none !important; }
+  .field.toggle-field { animation: fadeInUp .35s ease-out both; animation-delay: 0s; }
 
   label {
     font-size: 13.5px;
@@ -453,14 +457,29 @@
       <div class="field">
         <label>&iquest;Asistir&aacute;s? <span class="req">*</span></label>
         <div class="attend-toggle">
-          <input type="radio" id="asiste-si" name="asiste" value="Sí" required>
+          <input type="radio" id="asiste-si" name="asiste" value="Sí">
           <label class="opt" for="asiste-si">S&iacute;, asistir&eacute;</label>
-          <input type="radio" id="asiste-no" name="asiste" value="No" required>
+          <input type="radio" id="asiste-no" name="asiste" value="No">
           <label class="opt" for="asiste-no">No podr&eacute;</label>
         </div>
       </div>
 
-      <div class="field">
+      <div class="field toggle-field" id="companionField" hidden>
+        <label>&iquest;Vas con acompa&ntilde;ante? <span class="req">*</span></label>
+        <div class="attend-toggle">
+          <input type="radio" id="acomp-si" name="acompanante" value="Sí" disabled>
+          <label class="opt" for="acomp-si">S&iacute;</label>
+          <input type="radio" id="acomp-no" name="acompanante" value="No" disabled>
+          <label class="opt" for="acomp-no">No</label>
+        </div>
+      </div>
+
+      <div class="field toggle-field" id="companionNameField" hidden>
+        <label for="acompNombre">Nombre del acompa&ntilde;ante <span class="req">*</span></label>
+        <input type="text" id="acompNombre" name="nombre_acompanante" placeholder="Nombre completo" disabled>
+      </div>
+
+      <div class="field" id="mensajeField">
         <label for="mensaje">Comentarios / restricciones alimenticias</label>
         <textarea id="mensaje" name="mensaje" placeholder="Alergias, mensaje o cualquier detalle que quieras compartir"></textarea>
       </div>
@@ -521,6 +540,32 @@
     }
   };
 
+  // La pregunta del acompañante solo existe para quien entra con ?acomp=1 en el link
+  const acompParam = new URLSearchParams(location.search).get('acomp');
+  const companionEnabled = acompParam !== null && acompParam !== '0' && acompParam !== 'false';
+  const companionField = document.getElementById('companionField');
+  const companionNameField = document.getElementById('companionNameField');
+  const acompNombre = document.getElementById('acompNombre');
+  const acompRadios = document.querySelectorAll('input[name="acompanante"]');
+
+  function setVisible(box, inputs, on) {
+    box.hidden = !on;
+    inputs.forEach(i => { i.disabled = !on; });
+  }
+
+  function syncCompanion() {
+    if (!companionEnabled) return;
+    const asiste = (form.querySelector('input[name="asiste"]:checked') || {}).value;
+    const showQuestion = asiste === 'Sí';
+    setVisible(companionField, acompRadios, showQuestion);
+    const acomp = (form.querySelector('input[name="acompanante"]:checked') || {}).value;
+    setVisible(companionNameField, [acompNombre], showQuestion && acomp === 'Sí');
+  }
+
+  form.querySelectorAll('input[name="asiste"], input[name="acompanante"]').forEach(r => {
+    r.addEventListener('change', syncCompanion);
+  });
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -528,6 +573,19 @@
       statusMsg.textContent = 'Falta configurar la URL de Google Apps Script en el archivo index.html.';
       statusMsg.classList.add('error');
       return;
+    }
+
+    const fail = (msg) => {
+      statusMsg.textContent = msg;
+      statusMsg.classList.add('error');
+    };
+    if (!form.querySelector('input[name="asiste"]:checked')) {
+      return fail('Cuéntanos si podrás asistir.');
+    }
+    if (companionEnabled && form.querySelector('input[name="asiste"]:checked').value === 'Sí') {
+      const acomp = form.querySelector('input[name="acompanante"]:checked');
+      if (!acomp) return fail('Cuéntanos si vas con acompañante.');
+      if (acomp.value === 'Sí' && !acompNombre.value.trim()) return fail('Escribe el nombre de tu acompañante.');
     }
 
     statusMsg.classList.remove('error');

@@ -725,6 +725,12 @@
     items.forEach(el => el.classList.add('in-view'));
   }
 
+  // El botón de confirmar conserva los parámetros del link (ej. ?acomp=1)
+  (function () {
+    const cta = document.querySelector('.cta-button');
+    if (cta && location.search) cta.href = 'index.html' + location.search;
+  })();
+
   // Apertura del sobre
   const cover = document.getElementById('cover');
   const seal = document.getElementById('seal');
